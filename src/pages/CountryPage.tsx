@@ -1,8 +1,8 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
-import { getApiData } from '../utils/http-helpers'
 import { useQuery } from 'react-query'
-import { Country } from '../models/Country'
+import { useParams } from 'react-router-dom'
+import { Country } from '@models/Country'
+import { getApiData } from '@utils/http-helpers'
 
 const CountryPage: React.FC = () => {
   const { countryName } = useParams()

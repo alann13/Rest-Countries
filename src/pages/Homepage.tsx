@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import { useQuery } from 'react-query'
 import { Link } from 'react-router-dom'
-import SearchBox from '../components/SearchBox/SearchBox'
-import { Country } from '../models/Country'
-import { getApiData } from '../utils/http-helpers'
-import { COUNTRY_PATH } from '../utils/constants'
-import { useSearchContext } from '../hooks/useSearch'
+import { Box, List, ListItem } from '@chakra-ui/react'
+import SearchBox from '@components/SearchBox/SearchBox'
+import { useSearchContext } from '@hooks/useSearch'
+import { Country } from '@models/Country'
+import { COUNTRY_PATH } from '@utils/constants'
+import { getApiData } from '@utils/http-helpers'
 
 const HomePage: React.FC = () => {
   const [apiPath, setApiPath] = useState<string>('all')
@@ -17,16 +18,16 @@ const HomePage: React.FC = () => {
   }
 
   return (
-    <div>
+    <Box>
       <SearchBox />
-      <ul>
+      <List>
         {countries?.filter(bySearchedCountry).map((country, index) => (
-          <li key={index}>
+          <ListItem key={index}>
             <Link to={`/${COUNTRY_PATH}/${country.name}`}>{country.name}</Link>
-          </li>
+          </ListItem>
         ))}
-      </ul>
-    </div>
+      </List>
+    </Box>
   )
 }
 

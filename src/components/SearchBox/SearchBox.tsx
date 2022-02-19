@@ -1,5 +1,5 @@
 import React from 'react'
-import { useSearchContext } from '../../hooks/useSearch'
+import { useSearchContext } from '@hooks/useSearch'
 
 const SearchBox: React.FC = () => {
   const { searchTerm, setSearchTerm } = useSearchContext()

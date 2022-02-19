@@ -1,5 +1,5 @@
+import { Country } from '@models/Country'
 import { REST_COUNTRIES_BASE_URL } from './constants'
-import { Country } from '../models/Country'
 
 // Can't really put type to param as this is coming from a third party api.
 const toFormattedCountryData = (country: any): Country => {
