@@ -1,33 +1,54 @@
 import React, { useState } from 'react'
 import { useQuery } from 'react-query'
 import { Link } from 'react-router-dom'
-import { Box, List, ListItem } from '@chakra-ui/react'
+import { Box, Spinner, Wrap, WrapItem } from '@chakra-ui/react'
 import SearchBox from '@components/SearchBox/SearchBox'
 import { useSearchContext } from '@hooks/useSearch'
 import { Country } from '@models/Country'
 import { COUNTRY_PATH } from '@utils/constants'
 import { getApiData } from '@utils/http-helpers'
+import Card from '@components/Card/Card'
 
 const HomePage: React.FC = () => {
-  const [apiPath, setApiPath] = useState<string>('all')
+  const [apiPath] = useState<string>('all')
   const { searchTerm } = useSearchContext()
-  const { data: countries } = useQuery<Country[]>('countriesData', () => getApiData(apiPath))
+  const { data: countries, isLoading } = useQuery<Country[]>(
+    'countriesData',
+    () => getApiData(apiPath),
+  )
 
   const bySearchedCountry = (country: Country): boolean => {
     return country.name.toLowerCase().includes(searchTerm)
   }
 
   return (
-    <Box>
-      <SearchBox />
-      <List>
-        {countries?.filter(bySearchedCountry).map((country, index) => (
-          <ListItem key={index}>
-            <Link to={`/${COUNTRY_PATH}/${country.name}`}>{country.name}</Link>
-          </ListItem>
-        ))}
-      </List>
-    </Box>
+    <>
+      <Box as="section">
+        <SearchBox />
+      </Box>
+      <Wrap justify={['center', 'center', 'center', 'space-between']}>
+        {isLoading ? (
+          <Spinner thickness="4px" />
+        ) : (
+          countries
+            ?.filter(bySearchedCountry)
+            .map(({ name, capital, flag, population, region }, index) => (
+              <WrapItem key={index}>
+                <Link to={`/${COUNTRY_PATH}/${name}`}>
+                  <Card
+                    capital={capital[0]}
+                    cardHeading={name}
+                    imgAlt={name}
+                    imgUrl={flag}
+                    population={population}
+                    region={region}
+                  />
+                </Link>
+              </WrapItem>
+            ))
+        )}
+      </Wrap>
+    </>
   )
 }
 

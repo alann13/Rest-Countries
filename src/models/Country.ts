@@ -8,4 +8,5 @@ export interface Country {
   subregion: string
   capital: string[]
   topLevelDomain: string[]
+  flag: string
 }

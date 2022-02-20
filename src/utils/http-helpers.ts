@@ -3,7 +3,17 @@ import { REST_COUNTRIES_BASE_URL } from './constants'
 
 // Can't really put type to param as this is coming from a third party api.
 const toFormattedCountryData = (country: any): Country => {
-  const { borders, currencies, name, population, region, subregion, capital, tld } = country
+  const {
+    borders,
+    currencies,
+    name,
+    population,
+    region,
+    subregion,
+    capital,
+    tld,
+    flags,
+  } = country
 
   return {
     borders,
@@ -13,8 +23,9 @@ const toFormattedCountryData = (country: any): Country => {
     population,
     region,
     subregion,
-    capital,
+    capital: capital ? capital : ['No capital'],
     topLevelDomain: tld,
+    flag: flags.png,
   }
 }
 
@@ -23,7 +34,9 @@ export const getApiData = async (path: string): Promise<Country[]> => {
     const response = await fetch(`${REST_COUNTRIES_BASE_URL}/${path}`)
     const countryData = await response.json()
 
-    const formattedCountriesData: Country[] = countryData.map(toFormattedCountryData)
+    const formattedCountriesData: Country[] = countryData.map(
+      toFormattedCountryData,
+    )
 
     return formattedCountriesData
   } catch (error) {
