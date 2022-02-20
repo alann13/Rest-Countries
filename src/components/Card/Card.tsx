@@ -26,7 +26,13 @@ const Card: React.FC<CardProps> = ({
   ]
 
   return (
-    <Box boxShadow="lg" h={'21rem'} mb={5} w="16.5rem">
+    <Box
+      backgroundColor="white"
+      h={'21rem'}
+      shadow="lg"
+      w="16.5rem"
+      _hover={{ shadow: '2xl' }}
+    >
       <Image alt={imgAlt} h={'10rem'} src={imgUrl} w={'100%'} />
       <Box p={5}>
         <Heading as={'h2'} fontSize="1.125rem" fontWeight={'extrabold'} mb={5}>
@@ -34,7 +40,7 @@ const Card: React.FC<CardProps> = ({
         </Heading>
         <List>
           {cardDetails.map(({ item, itemValue }) => (
-            <CardListItem item={item} itemValue={itemValue} />
+            <CardListItem key={item} item={item} itemValue={itemValue} />
           ))}
         </List>
       </Box>

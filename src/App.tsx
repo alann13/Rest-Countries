@@ -1,9 +1,9 @@
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { QueryClientProvider } from 'react-query'
-import { ChakraProvider } from '@chakra-ui/react'
+import { Box, ChakraProvider } from '@chakra-ui/react'
 import Nav from '@components/Nav/Nav'
-import { useSearchContext, SearchContext } from './hooks/useSearch'
+import useSearch, { SearchContext } from './hooks/useSearch'
 import HomePage from './pages/Homepage'
 import CountryPage from './pages/CountryPage'
 import NotFoundPage from './pages/NotFoundPage'
@@ -12,25 +12,28 @@ import { COUNTRY_PATH } from './utils/constants'
 import { Container } from '@chakra-ui/react'
 
 const App: React.FC = () => {
-  const { searchTerm, setSearchTerm } = useSearchContext()
+  const search = useSearch()
 
   return (
     <QueryClientProvider client={queryClient}>
       <ChakraProvider>
-        <SearchContext.Provider value={{ searchTerm, setSearchTerm }}>
+        <SearchContext.Provider value={search}>
           <BrowserRouter>
-            <header>
+            <Box as="header">
               <Nav />
-            </header>
-            <main>
+            </Box>
+            <Box as="main" py={16} backgroundColor={'#F2F2F2'}>
               <Container maxW={'80rem'}>
                 <Routes>
                   <Route path="/" element={<HomePage />} />
-                  <Route path={`/${COUNTRY_PATH}/:countryName`} element={<CountryPage />} />
+                  <Route
+                    path={`/${COUNTRY_PATH}/:countryName`}
+                    element={<CountryPage />}
+                  />
                   <Route path="*" element={<NotFoundPage />} />
                 </Routes>
               </Container>
-            </main>
+            </Box>
           </BrowserRouter>
         </SearchContext.Provider>
       </ChakraProvider>

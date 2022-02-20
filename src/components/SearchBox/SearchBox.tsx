@@ -1,23 +1,23 @@
 import React from 'react'
 import { useSearchContext } from '@hooks/useSearch'
+import { Input, InputGroup, InputLeftElement } from '@chakra-ui/react'
+import { Search2Icon } from '@chakra-ui/icons'
 
 const SearchBox: React.FC = () => {
   const { searchTerm, setSearchTerm } = useSearchContext()
 
-  // Searchbox is only used for filtering. Won't be submitting anything.
-  const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
-    event.preventDefault()
-  }
-
-  const handleChangeEvent = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setSearchTerm(event.target.value)
-  }
-
   return (
-    <form onSubmit={handleFormSubmit}>
-      <label>Search</label>
-      <input type="text" onChange={handleChangeEvent} value={searchTerm} />
-    </form>
+    <InputGroup w={['100%', '100%', '30rem']}>
+      <InputLeftElement children={<Search2Icon />} pointerEvents="none" />
+      <Input
+        backgroundColor={'white'}
+        boxShadow="base"
+        onChange={(e) => setSearchTerm(e.target.value)}
+        placeholder="Search for a country..."
+        value={searchTerm}
+        _placeholder={{ color: '#848484' }}
+      />
+    </InputGroup>
   )
 }
 
