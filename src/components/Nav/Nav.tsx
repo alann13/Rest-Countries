@@ -1,4 +1,10 @@
-import { Button, Container, Heading, useColorMode } from '@chakra-ui/react'
+import {
+  Button,
+  Container,
+  Heading,
+  useColorMode,
+  ColorMode,
+} from '@chakra-ui/react'
 import { MoonIcon, SunIcon } from '@chakra-ui/icons'
 import React from 'react'
 import { Link } from 'react-router-dom'
@@ -6,9 +12,10 @@ import { Link } from 'react-router-dom'
 const Nav: React.FC = () => {
   const { colorMode, toggleColorMode } = useColorMode()
 
-  const isLightMode = (colorMode: string) => {
+  const isLightMode = (colorMode: ColorMode): boolean => {
     return colorMode === 'light'
   }
+
   return (
     <Container
       alignItems="center"

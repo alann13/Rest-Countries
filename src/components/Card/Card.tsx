@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Image, Heading, List } from '@chakra-ui/react'
+import { Box, Image, Heading, List, useColorModeValue } from '@chakra-ui/react'
 import CardListItem from './CardInfo'
 
 interface CardProps {
@@ -25,9 +25,11 @@ const Card: React.FC<CardProps> = ({
     { item: 'capital', itemValue: capital },
   ]
 
+  const cardBackgroundColor = useColorModeValue('white', '#2B3844')
+
   return (
     <Box
-      backgroundColor="white"
+      backgroundColor={cardBackgroundColor}
       h={'21rem'}
       shadow="lg"
       w="16.5rem"
