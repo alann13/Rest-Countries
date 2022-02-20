@@ -10,19 +10,25 @@ import NotFoundPage from './pages/NotFoundPage'
 import { queryClient } from './utils/react-query-helpers'
 import { COUNTRY_PATH } from './utils/constants'
 import { Container } from '@chakra-ui/react'
+import { theme } from '@utils/theme'
 
 const App: React.FC = () => {
   const search = useSearch()
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ChakraProvider>
+      <ChakraProvider theme={theme}>
         <SearchContext.Provider value={search}>
           <BrowserRouter>
             <Box as="header">
               <Nav />
             </Box>
-            <Box as="main" py={16} backgroundColor={'#F2F2F2'}>
+            <Box
+              as="main"
+              py={[5, 5, 16]}
+              backgroundColor={'#F2F2F2'}
+              minH="calc(100vh - 5rem)"
+            >
               <Container maxW={'80rem'}>
                 <Routes>
                   <Route path="/" element={<HomePage />} />

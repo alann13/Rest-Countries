@@ -31,7 +31,7 @@ const HomePage: React.FC = () => {
           as="ul"
           columns={[1, 1, 2, 3, 4]}
           gap={16}
-          justifyItems="center"
+          justifyItems={['center', 'center', 'center', 'normal']}
         >
           {isLoading ? (
             <Spinner thickness="4px" />
