@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom'
 import { Country } from '@models/Country'
 import { getApiData, getBorderCountries } from '@utils/http-helpers'
 import CardListItem from '@components/Card/CardInfo'
-import BackButton from '@components/BackButton/BackButton'
+import BackButton from '@components/Buttons/BackButton/BackButton'
 import { formattedLanguages } from '@utils/general-helpers'
 
 const CountryPage: React.FC = () => {

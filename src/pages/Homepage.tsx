@@ -20,7 +20,7 @@ const HomePage: React.FC = () => {
   )
 
   const bySearchedCountry = ({ name }: Country): boolean => {
-    return name.toLowerCase().includes(searchTerm)
+    return name.toLowerCase().includes(searchTerm.toLowerCase())
   }
 
   const setRegion = (region: string): void => {

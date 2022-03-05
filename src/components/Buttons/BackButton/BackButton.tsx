@@ -13,6 +13,7 @@ const BackButton: React.FC = () => {
       p={0}
       textTransform="capitalize"
       variant="unstyled"
+      _focus={{ shadow: '0' }}
     >
       back
     </Button>
