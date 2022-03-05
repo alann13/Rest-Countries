@@ -18,10 +18,10 @@ const CountryPage: React.FC = () => {
   const country = countryData ? countryData[0] : null
 
   const { data: borderCountries } = useQuery<any[]>(
-    'borderCountries',
+    ['borderCountries', countryName],
     () => getBorderCountries(`${country?.borders.reduce((acc, curr) => (acc += curr + ','), '')}`),
     {
-      enabled: !!country,
+      enabled: !!country?.borders,
     },
   )
 
@@ -43,7 +43,9 @@ const CountryPage: React.FC = () => {
         },
         {
           item: 'currencies',
-          itemValue: country.currencies[Object.keys(country.currencies)[0]].name,
+          itemValue: country.currencies
+            ? country.currencies[Object.keys(country.currencies)[0]].name
+            : 'Unknown',
         },
         {
           item: 'languages',
@@ -71,7 +73,7 @@ const CountryPage: React.FC = () => {
             <Image borderRadius="8px" src={country.flag} w={['100%', '100%', '35rem']} />
 
             {/* Right Side - Bottom Side Responsive */}
-            <Box w={['35rem']} mt={[8, 8, 8, 8, 0]}>
+            <Box w={['100%', '100%', '35rem']} mt={[8, 8, 8, 8, 0]}>
               <Heading as="h2" mb={[6, 6, 6, 3, 3]}>
                 {country.name}
               </Heading>
@@ -95,7 +97,7 @@ const CountryPage: React.FC = () => {
                 <Text fontWeight="semibold" textTransform="capitalize">
                   border countries:
                 </Text>
-                <List display="flex" mt={3}>
+                <List display="flex" flexWrap="wrap" mt={3}>
                   {borderCountries?.map((borderCountry, index) => (
                     <ListItem
                       alignItems="center"
@@ -104,11 +106,13 @@ const CountryPage: React.FC = () => {
                       display="flex"
                       fontSize="0.75rem"
                       justifyContent="center"
-                      key={index}
+                      key={borderCountry.name.common}
                       mr={2}
+                      mb={2}
                       minW="6rem"
                       p={3}
                       shadow="base"
+                      _hover={{ border: '1px solid grey' }}
                     >
                       <Link to={`/${COUNTRY_PATH}/${borderCountry.name.common}`}>
                         {borderCountry.name.common}

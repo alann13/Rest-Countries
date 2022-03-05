@@ -45,11 +45,11 @@ export const getApiData = async (path: string): Promise<Country[]> => {
   }
 }
 
-export const getBorderCountries = async (codes: any): Promise<any> => {
+export const getBorderCountries = async (codes: string): Promise<any> => {
   try {
     const response = await fetch(`${REST_COUNTRIES_BASE_URL}/alpha?codes=${codes}`)
     const borderCountriesData = await response.json()
-    console.log(borderCountriesData)
+
     return borderCountriesData
   } catch (error) {
     console.error(error)
