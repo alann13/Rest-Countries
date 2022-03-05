@@ -1,6 +1,5 @@
 import React from 'react'
 import { useQuery } from 'react-query'
-import { Link } from 'react-router-dom'
 import { Box, Heading, Image, List, Spinner, Text, ListItem } from '@chakra-ui/react'
 import { useParams } from 'react-router-dom'
 import { Country } from '@models/Country'
@@ -8,7 +7,6 @@ import { getApiData, getBorderCountries } from '@utils/http-helpers'
 import CardListItem from '@components/Card/CardInfo'
 import BackButton from '@components/BackButton/BackButton'
 import { formattedLanguages } from '@utils/general-helpers'
-import { COUNTRY_PATH } from '@utils/constants'
 
 const CountryPage: React.FC = () => {
   const { countryName } = useParams()
@@ -17,7 +15,7 @@ const CountryPage: React.FC = () => {
   )
   const country = countryData ? countryData[0] : null
 
-  const { data: borderCountries } = useQuery<any[]>(
+  const { data: borderCountries } = useQuery<any>(
     ['borderCountries', countryName],
     () => getBorderCountries(`${country?.borders.reduce((acc, curr) => (acc += curr + ','), '')}`),
     {
@@ -98,11 +96,10 @@ const CountryPage: React.FC = () => {
                   border countries:
                 </Text>
                 <List display="flex" flexWrap="wrap" mt={3}>
-                  {borderCountries?.map((borderCountry, index) => (
+                  {borderCountries?.map((borderCountry: any) => (
                     <ListItem
                       alignItems="center"
                       borderRadius="5px"
-                      cursor="pointer"
                       display="flex"
                       fontSize="0.75rem"
                       justifyContent="center"
@@ -112,11 +109,8 @@ const CountryPage: React.FC = () => {
                       minW="6rem"
                       p={3}
                       shadow="base"
-                      _hover={{ border: '1px solid grey' }}
                     >
-                      <Link to={`/${COUNTRY_PATH}/${borderCountry.name.common}`}>
-                        {borderCountry.name.common}
-                      </Link>
+                      {borderCountry.name.common}
                     </ListItem>
                   ))}
                 </List>
