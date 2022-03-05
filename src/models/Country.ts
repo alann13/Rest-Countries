@@ -1,6 +1,7 @@
 export interface Country {
   borders: string[]
-  currencies: any
+  currencies: { [key: string]: any }
+  languages: { [key: string]: any }
   name: string
   nativeName: string
   population: number

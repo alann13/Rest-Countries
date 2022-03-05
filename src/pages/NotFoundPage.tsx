@@ -1,7 +1,8 @@
 import React from 'react'
+import { Box } from '@chakra-ui/react'
 
 const NotFoundPage: React.FC = () => {
-  return <div>this is the not found page.</div>
+  return <Box>404 not found!</Box>
 }
 
 export default NotFoundPage

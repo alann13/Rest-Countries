@@ -5,19 +5,21 @@ import { REST_COUNTRIES_BASE_URL } from './constants'
 const toFormattedCountryData = (country: any): Country => {
   const {
     borders,
+    capital,
     currencies,
+    flags,
+    languages,
     name,
     population,
     region,
     subregion,
-    capital,
     tld,
-    flags,
   } = country
 
   return {
     borders,
     currencies,
+    languages,
     name: name.common,
     nativeName: name.official,
     population,
@@ -34,11 +36,21 @@ export const getApiData = async (path: string): Promise<Country[]> => {
     const response = await fetch(`${REST_COUNTRIES_BASE_URL}/${path}`)
     const countryData = await response.json()
 
-    const formattedCountriesData: Country[] = countryData.map(
-      toFormattedCountryData,
-    )
+    const formattedCountriesData: Country[] = countryData.map(toFormattedCountryData)
 
     return formattedCountriesData
+  } catch (error) {
+    console.error(error)
+    throw new Error()
+  }
+}
+
+export const getBorderCountries = async (codes: any): Promise<any> => {
+  try {
+    const response = await fetch(`${REST_COUNTRIES_BASE_URL}/alpha?codes=${codes}`)
+    const borderCountriesData = await response.json()
+    console.log(borderCountriesData)
+    return borderCountriesData
   } catch (error) {
     console.error(error)
     throw new Error()
