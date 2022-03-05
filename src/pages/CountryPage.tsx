@@ -28,8 +28,7 @@ const CountryPage: React.FC = () => {
         },
         {
           item: 'currencies',
-          itemValue:
-            country.currencies[Object.keys(country.currencies)[0]].name,
+          itemValue: country.currencies[Object.keys(country.currencies)[0]].name,
         },
       ]
     : []

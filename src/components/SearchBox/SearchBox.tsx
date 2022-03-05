@@ -1,11 +1,6 @@
 import React from 'react'
 import { useSearchContext } from '@hooks/useSearch'
-import {
-  Input,
-  InputGroup,
-  InputLeftElement,
-  useColorModeValue,
-} from '@chakra-ui/react'
+import { Input, InputGroup, InputLeftElement, useColorModeValue } from '@chakra-ui/react'
 import { Search2Icon } from '@chakra-ui/icons'
 
 const SearchBox: React.FC = () => {
@@ -14,7 +9,7 @@ const SearchBox: React.FC = () => {
   const placeholderColor = useColorModeValue('#848484', 'white')
 
   return (
-    <InputGroup w={['100%', '100%', '100%', '30rem']}>
+    <InputGroup>
       <InputLeftElement
         children={<Search2Icon color="#848484" />}
         pointerEvents="none"

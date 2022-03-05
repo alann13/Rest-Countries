@@ -1,19 +1,14 @@
-import {
-  Button,
-  Container,
-  Heading,
-  useColorMode,
-  ColorMode,
-} from '@chakra-ui/react'
-import { MoonIcon, SunIcon } from '@chakra-ui/icons'
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { Button, Container, Heading, useColorMode, ColorMode } from '@chakra-ui/react'
+import { MoonIcon, SunIcon } from '@chakra-ui/icons'
+import { ColorModeEnum } from '@utils/enums/ColorMode'
 
 const Nav: React.FC = () => {
   const { colorMode, toggleColorMode } = useColorMode()
 
   const isLightMode = (colorMode: ColorMode): boolean => {
-    return colorMode === 'light'
+    return colorMode === ColorModeEnum.LIGHT
   }
 
   return (
@@ -26,11 +21,7 @@ const Nav: React.FC = () => {
       maxW="80rem"
     >
       <Link to="/">
-        <Heading
-          as="h1"
-          fontWeight="extrabold"
-          fontSize={['0.875rem', '0.875rem', '1.5rem']}
-        >
+        <Heading as="h1" fontWeight="extrabold" fontSize={['0.875rem', '0.875rem', '1.5rem']}>
           Where in the world?
         </Heading>
       </Link>
@@ -42,7 +33,7 @@ const Nav: React.FC = () => {
         textTransform="capitalize"
         variant="unstyled"
       >
-        {isLightMode(colorMode) ? 'dark mode' : 'light mode'}
+        {`${isLightMode(colorMode) ? ColorModeEnum.DARK : ColorModeEnum.LIGHT} mode`}
       </Button>
     </Container>
   )

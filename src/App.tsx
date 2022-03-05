@@ -23,19 +23,11 @@ const App: React.FC = () => {
           <Box as="header" bg={headerBackgroundColor}>
             <Nav />
           </Box>
-          <Box
-            as="main"
-            py={[5, 5, 16]}
-            bg={bodyBackgroundColor}
-            minH="calc(100vh - 5rem)"
-          >
-            <Container maxW={'80rem'}>
+          <Box as="main" py={[5, 5, 5, 10]} bg={bodyBackgroundColor} minH="calc(100vh - 5rem)">
+            <Container maxW={['80rem']}>
               <Routes>
                 <Route path="/" element={<HomePage />} />
-                <Route
-                  path={`/${COUNTRY_PATH}/:countryName`}
-                  element={<CountryPage />}
-                />
+                <Route path={`/${COUNTRY_PATH}/:countryName`} element={<CountryPage />} />
                 <Route path="*" element={<NotFoundPage />} />
               </Routes>
             </Container>
